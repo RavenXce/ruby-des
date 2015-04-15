@@ -65,8 +65,8 @@ module RubyDES
       16.times do |i|
         l << r[i]
         r << XOR.run(Feistel.run(r[i], k[i]), l[i])
-        puts "L#{i+1}: #{l.join}"
-        puts "R#{i+1}: #{r.join}"
+        puts "L#{i+1}: #{l.last.join}"
+        puts "R#{i+1}: #{r.last.join}"
       end
       
       return RubyDES::Block.new(FP.collect{|p| (r.last + l.last)[p - 1]})
