@@ -88,9 +88,10 @@ module RubyDES
         @string    = [input.join].pack('B*')
         @bit_array = input
       elsif input.is_a?(Bignum)
-
         @bit_array = input.to_s(2).rjust(64, '0').split('').map(&:to_i)
         @string = [@bit_array.join].pack('B*')
+
+        raise "RubyDES::InvalidNumberSize: Input number must not be larger than (64) bits." unless @bit_array.size.eql?(64)
       else
         raise "RubyDES::InvalidFormat: Input must be a String or an Array."
       end

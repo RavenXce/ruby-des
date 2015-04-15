@@ -1,7 +1,7 @@
 require './lib/ruby-des'
 
-data = RubyDES::Block.new('FEDCBA9876543210'.to_i(16))
-key  = RubyDES::Block.new('0x133457799BBCDFF1'.to_i(16))
+data = RubyDES::Block.new('FEDCBA9876543210'.hex)
+key  = RubyDES::Block.new('0x133457799BBCDFF1'.hex)
 
 des = RubyDES::Ctx.new(data, key)
 

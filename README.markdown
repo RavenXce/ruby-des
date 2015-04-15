@@ -46,8 +46,14 @@ You can then check to see if it all worked.
 
 Enjoy!
 
-Feedback
-========
 
-If you have any questions, comments or just want to talk shop about crypto, feel free to reach me 
-through my website at http://www.robertsosinski.com.
+More Info
+=========
+
+This fork fixes some minor issues with String inputs and adds Bignum support (hex, integer, etc) for constructing a `RubyDES::Block`.
+
+It also prints out a trace after the initial permutation, at each iteration of key schedule calculation, and at each iteration of encryption.
+
+Finally, a sample runnable script is provided in `main.rb`.
+
+If you have any questions or comments about the original library, or just want to talk shop about crypto, please contact the original author at http://www.robertsosinski.com.
