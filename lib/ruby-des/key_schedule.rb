@@ -44,6 +44,7 @@ class KeySchedule
       end
       
       k << PC_2.collect{|p| (c[i + 1] + d[i + 1])[p - 1]}
+      puts "KS#{i+1}: #{k.last.join}"
     end
     
     @sub_keys = k
