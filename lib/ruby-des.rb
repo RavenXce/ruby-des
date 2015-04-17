@@ -53,7 +53,7 @@ module RubyDES
       l << IP_L.collect{|p| data.bit_array[p - 1]}
       r << IP_R.collect{|p| data.bit_array[p - 1]}
 
-      puts "Initial permutation: #{l.join}#{r.join}"
+      puts "Initial permutation: #{l.join}#{r.join} = #{"%016X" % (l.join+r.join).to_i(2)}"
       
       case operation
       when :encrypt
@@ -65,8 +65,8 @@ module RubyDES
       16.times do |i|
         l << r[i]
         r << XOR.run(Feistel.run(r[i], k[i]), l[i])
-        puts "L#{i+1}: #{l.last.join}"
-        puts "R#{i+1}: #{r.last.join}"
+        puts "L#{i+1}: #{l.last.join} = #{"%08X" % l.last.join.to_i(2)}"
+        puts "R#{i+1}: #{r.last.join} = #{"%08X" %  r.last.join.to_i(2)}"
       end
       
       return RubyDES::Block.new(FP.collect{|p| (r.last + l.last)[p - 1]})
@@ -87,12 +87,13 @@ module RubyDES
 
         @string    = [input.join].pack('B*')
         @bit_array = input
-      elsif input.is_a?(Bignum)
+      elsif input.is_a?(Numeric)
         @bit_array = input.to_s(2).rjust(64, '0').split('').map(&:to_i)
         @string = [@bit_array.join].pack('B*')
 
         raise "RubyDES::InvalidNumberSize: Input number must not be larger than (64) bits." unless @bit_array.size.eql?(64)
       else
+	puts input.class
         raise "RubyDES::InvalidFormat: Input must be a String or an Array."
       end
     end
